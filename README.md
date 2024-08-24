@@ -2,7 +2,9 @@
 ## How to setup simulator?
 1. Build the Dockerfile
 ```bash
-cd bluerov2_heavy_sim/orca4/docker
+cd bluerov2_heavy_sim
+git submodule update --init --recursive
+cd orca4/docker
 ./build.sh
 ```
 2. Run the docker container, please configure the run.sh according to your computer's graphics card.
