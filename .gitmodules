@@ -1,0 +1,20 @@
+[submodule "colcon_ws/src/bluerov2_ignition"]
+	path = colcon_ws/src/bluerov2_ignition
+	url = https://github.com/clydemcqueen/bluerov2_ignition
+	branch = main
+[submodule "colcon_ws/src/orb_slam_2_ros"]
+	path = colcon_ws/src/orb_slam_2_ros
+	url = https://github.com/clydemcqueen/orb_slam_2_ros
+	branch = orca4_humble
+[submodule "colcon_ws/src/ros2_shared"]
+	path = colcon_ws/src/ros2_shared
+	url = https://github.com/ptrmu/ros2_shared
+	branch = master
+[submodule "colcon_ws/src/ros_gz"]
+	path = colcon_ws/src/ros_gz
+	url = https://github.com/gazebosim/ros_gz
+	branch = humble
+[submodule "orca4"]
+	path = orca4
+	url = https://github.com/clydemcqueen/orca4.git
+	branch = main
