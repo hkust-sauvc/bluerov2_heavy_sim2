@@ -90,11 +90,11 @@ delay_loop.poses.append(make_pose(x=0.0, y=0.0, z=-5.0))
 for j in range(0, 2):
     for i in range(0, 7):
         if  i%2 == 0:
-            delay_loop.poses.append(make_pose(x=0.0, y=float(i), z=-4.0))
-            delay_loop.poses.append(make_pose(x=15.0, y=float(i), z=-4.0))
+            delay_loop.poses.append(make_pose(x=0.0, y=float(i), z=-6.0))
+            delay_loop.poses.append(make_pose(x=15.0, y=float(i), z=-6.0))
         else:
-            delay_loop.poses.append(make_pose(x=15.0, y=float(i), z=-4.0))
-            delay_loop.poses.append(make_pose(x=0.0, y=float(i), z=-4.0))
+            delay_loop.poses.append(make_pose(x=15.0, y=float(i), z=-6.0))
+            delay_loop.poses.append(make_pose(x=0.0, y=float(i), z=-6.0))
 # for i in range(15,0,-1):
 #     if i%2 == 0:
 #         delay_loop.poses.append(make_pose(x=float(i), y=5.0, z=-5.0))

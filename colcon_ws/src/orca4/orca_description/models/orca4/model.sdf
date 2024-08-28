@@ -564,7 +564,7 @@
           </image>
           <clip>
             <near>0.02</near>
-            <far>300</far>
+            <far>4</far>
           </clip>
         </camera>
         <always_on>1</always_on>
@@ -616,7 +616,7 @@
           </image>
           <clip>
             <near>0.02</near>
-            <far>300</far>
+            <far>4</far>
           </clip>
         </camera>
         <always_on>1</always_on>
