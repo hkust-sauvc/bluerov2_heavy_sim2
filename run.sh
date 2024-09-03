@@ -20,7 +20,7 @@ fi
 # Run the Docker container with GUI support (without NVIDIA settings)
 current_dir=$(pwd)
 orca4_path=$(dirname "$current_dir")
-colcon_ws="colcon_ws"
+colcon_ws="bluerov2_heavy_sim/colcon_ws"
 colcon_ws_path="${orca4_path}/${colcon_ws}"
 
 # # Specific for non-Nvidia drivers

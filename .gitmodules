@@ -14,7 +14,3 @@
 	path = colcon_ws/src/ros_gz
 	url = https://github.com/gazebosim/ros_gz
 	branch = humble
-[submodule "orca4"]
-	path = orca4
-	url = https://github.com/clydemcqueen/orca4.git
-	branch = main

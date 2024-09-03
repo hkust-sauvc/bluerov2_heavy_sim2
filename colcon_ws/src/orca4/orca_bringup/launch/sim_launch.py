@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 
 # MIT License
 #
@@ -32,11 +32,43 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription, OpaqueFunction
 from launch.conditions import IfCondition, UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, TextSubstitution
 from launch_ros.actions import Node
+from launch_ros.substitutions import FindPackageShare
+
+def launch_setup(context, *args, **kwargs):
+
+    sensor_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [
+                PathJoinSubstitution(
+                    [
+                        FindPackageShare("dave_sensor_models"),
+                        "launch",
+                        "upload_sensor.launch.py",
+                    ]
+                )
+            ]
+        ),
+        launch_arguments={
+            "gui": "false",
+            "use_sim_time": "true",
+            "namespace": "teledyne_explorer4000",
+            "x": "0",
+            "y": "0",
+            "z": "0",
+            "roll": "0",
+            "pitch": "0",
+            "yaw": "0",
+            "use_ned_frame": "false",
+        }.items(),
+    )
+
+    return [sensor_launch]
 
 
 def generate_launch_description():
@@ -52,7 +84,7 @@ def generate_launch_description():
 
     sim_left_ini = os.path.join(orca_bringup_dir, 'cfg', 'sim_left.ini')
     sim_right_ini = os.path.join(orca_bringup_dir, 'cfg', 'sim_right.ini')
-    return LaunchDescription([
+    args = ([
         DeclareLaunchArgument(
             'ardusub',
             default_value='True',
@@ -247,5 +279,8 @@ def generate_launch_description():
                 'slam': LaunchConfiguration('slam'),
             }.items(),
         ),
+
     ])
 
+    return LaunchDescription(args + [OpaqueFunction(function=launch_setup)])
+    # return LaunchDescription(args)

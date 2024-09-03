@@ -31,8 +31,11 @@ export GZ_SIM_RESOURCE_PATH=${COLCON_WS}/src/bluerov2_ignition/models:${COLCON_W
 export GZ_SIM_RESOURCE_PATH=${COLCON_WS}/src/orca4/orca_description/models:${COLCON_WS}/src/orca4/orca_description/worlds:${COLCON_WS}/src/orca4/ust_seabed/models:$GZ_SIM_RESOURCE_PATH
 
 export GZ_SIM_RESOURCE_PATH=${COLCON_WS}/src/orca4/turbidity_generator/models:$GZ_SIM_RESOURCE_PATH
+
+export GZ_SIM_RESOURCE_PATH=${COLCON_WS}/src/dave/models:$GZ_SIM_RESOURCE_PATH
+
 # Build ros_gz on the humble branch for Gazebo Garden
-export GZ_VERSION=garden
+export GZ_VERSION=harmonic
 
 
 
