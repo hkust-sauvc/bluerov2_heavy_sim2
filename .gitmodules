@@ -14,3 +14,6 @@
 	path = colcon_ws/src/ros_gz
 	url = https://github.com/gazebosim/ros_gz
 	branch = humble
+[submodule "colcon_ws/src/dave"]
+	path = colcon_ws/src/dave
+	url = https://github.com/IOES-Lab/dave.git
