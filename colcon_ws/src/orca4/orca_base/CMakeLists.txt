@@ -10,6 +10,8 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake_auto REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(dave_interfaces REQUIRED)
 ament_auto_find_build_dependencies()
 
 ament_auto_add_executable(
@@ -34,6 +36,10 @@ ament_auto_add_executable(
 
 target_include_directories(manager PRIVATE include)
 
+ament_auto_add_executable(
+  dvl_sub
+  src/dvl_sub.cpp
+)
 # Load & run linters listed in package.xml
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

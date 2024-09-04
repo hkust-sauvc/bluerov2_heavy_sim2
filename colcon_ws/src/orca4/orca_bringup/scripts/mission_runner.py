@@ -95,13 +95,7 @@ for j in range(0, 2):
         else:
             delay_loop.poses.append(make_pose(x=15.0, y=float(i), z=-6.0))
             delay_loop.poses.append(make_pose(x=0.0, y=float(i), z=-6.0))
-# for i in range(15,0,-1):
-#     if i%2 == 0:
-#         delay_loop.poses.append(make_pose(x=float(i), y=5.0, z=-5.0))
-#         delay_loop.poses.append(make_pose(x=float(i), y=-5.0, z=-5.0))
-#     else:
-#         delay_loop.poses.append(make_pose(x=float(i), y=-5.0, z=-5.0))
-#         delay_loop.poses.append(make_pose(x=float(i), y=5.0, z=-5.0))
+
 # Send a goal to an action server and wait for the result.
 # Cancel the goal if the user hits ^C (KeyboardInterrupt).
 def send_goal(node, action_client, send_goal_msg) -> SendGoalResult:

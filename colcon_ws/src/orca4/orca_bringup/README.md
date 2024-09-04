@@ -79,3 +79,18 @@ You can use MAVProxy to drive the sub around the seafloor and build a map.
 The simulation uses Gazebo camera sensors to generate uncompressed 800x600 images in an
 ideal stereo configuration. The frame rate is throttled to 5Hz to reduce CPU load in ORB_SLAM2, but
 it can easily go higher.
+
+## Change the cameras
+If you want to change the cameras, it's necessary to do camera calibration.
+For details, please go through [here](git@github.com:HKUST-UROP-ROV-SIM/gazebo_camera_calibration.git).
+Once calibration is completed, please copy the parameters to the cfg folder for storage. Then, replace the parameters of the ```sim_left.ini``` and ```sim_right.ini```. Also, you need to provide the baseline of the cameras in the sim_orca_params.yaml.
+
+## 3D point cloud
+After finishing scanning, you may want to save the 3D point cloud.
+Please provide the file name, directory and run:
+```bash
+ros2 service call /orb_slam2_stereo_node/save_map orb_slam2_ros/srv/SaveMap name:\ \'\'\ 
+``` 
+
+## Load 3D point cloud during launch
+In the sim_orca_params.yaml, set ```map_file``` to your desired map and set ```load_map``` to ```True```.
