@@ -23,8 +23,8 @@ colcon build
 It may take a few minutes to compile as the project size is large.     
 
 2. Ways to launch simulation                           
-There are two ways to launch simulation, you can either launch by using [tmux](#tmux) or launch the program [one-by-one](#run_simulation).            
-3. Tmux                
+There are two ways to launch simulation, you can either launch with [tmux](#tmux) or launch [one by one](#run_simulation).            
+1. Tmux                
 Launch simulation
 ```bash
 chmod +x launch_sim.sh
@@ -32,7 +32,7 @@ chmod +x launch_sim.sh
 ```
 To shutdown simulation, enter ```ctrl-c``` in the main session. Once the program shutdowns, enter ```ctrl-b``` first, then enter ```:kill-session```
 
-4. Run_simulation
+1. Run_simulation
 
     1. 
     ```bash
@@ -140,7 +140,36 @@ map_file: "map.bin"
 
 ## DVL
 Relevant information can be found [here](https://yeongdocat.notion.site/Custom-ros_gz-bridge-for-DVL-Plugin-39a621c52833475ea661dade2660350f).
-TBD
+
+[Gazebo Sim DVL sensor documentation](https://gazebosim.org/api/sensors/8/classgz_1_1sensors_1_1DopplerVelocityLog.html).  
+There a some parameters need to be configured to mimic the real one (unit is degree)
+- aperture
+- rotation
+- tilt
+- bottom_mode
+- water_mass_mode
+- minimum_range
+- maximum_range
+
+Since the one used in real world is Water Linked DVL A50, the parameters are set to
+- aperture
+```
+aperture = c / (f * d) = 1500 / (1 000 000 * 0.02) = 0.075 rad
+0.075 rad = 0.075 * 180 / pi = 4.3 deg
+c (sound travelling speed in water) : 1500 ms^-2
+f (frequency)                       : 1 MHz
+d (transducer diameter)             : 2cm
+```
+- rotation
+The transducers are placed evenly and separated by 45 degree angles. 
+- tilt
+According to [BlueRobotics](https://bluerobotics.com/store/the-reef/dvl-a50/), the transducers are tilted at 15 degree angles.
+- minimum_range
+5 cm
+- maximum_range
+50 m
+
+The above information is provided by [link](https://waterlinked.com/web/content/15701?unique=b4aef6d930bb256c64bae4e0ead8c56661bf12f0).
 
 ## Git LFS
 [Git LFS](https://git-lfs.com/) is used for tracking the larger-sized files such as the seabed model.   
