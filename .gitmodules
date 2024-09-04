@@ -18,3 +18,6 @@
 [submodule "colcon_ws/src/dave"]
 	path = colcon_ws/src/dave
 	url = git@github.com:HKUST-UROP-ROV-SIM/dave.git
+[submodule "orca4"]
+	path = orca4
+	url = git@github.com:HKUST-UROP-ROV-SIM/orca4.git
