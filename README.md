@@ -4,7 +4,7 @@
 If Git LFS isn't isntalled, [install here](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage).
 2. Clone the repo
 ```bash
-git clnoe git@github.com:HKUST-UROP-ROV-SIM/bluerov2_heavy_sim.git
+git clone git@github.com:HKUST-UROP-ROV-SIM/bluerov2_heavy_sim.git
 ```
 3. Build the Dockerfile
 ```bash
