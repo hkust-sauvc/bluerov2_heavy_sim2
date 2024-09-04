@@ -635,18 +635,18 @@
 
     <link name="acoustic_pinger_link">
       <!-- Visual Representation -->
-      <visual name="acoustic_pinger_visual">
-          <pose>0 0 0 0 0 0</pose> <!-- Adjust pose as needed -->
+      <!-- <visual name="acoustic_pinger_visual">
+          <pose>0 0 0 0 0 0</pose> 
           <geometry>
               <cylinder>
-                  <radius>0.05</radius> <!-- Cylinder radius -->
-                  <length>0.2</length>  <!-- Cylinder length -->
+                  <radius>0.05</radius> 
+                  <length>0.2</length>  
               </cylinder>
           </geometry>
           <material>
-              <ambient>1 0 0 1</ambient> <!-- Red color, fully opaque -->
+              <ambient>1 0 0 1</ambient> 
           </material>
-      </visual>
+      </visual> -->
 
     <!-- Inertial Properties -->
       <inertial>
@@ -667,11 +667,11 @@
     <!-- Noise and other parameters can be defined here -->
   </plugin>
 
-    <link name="dvl500_base_link">
+    <link name="water_linked_dvl_a50_base_link">
       <pose>0 0 -0.2 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>3.5</mass>
+        <mass>0.17</mass>
         <inertia>
           <ixx>0.0195872</ixx>
           <ixy>0</ixy>
@@ -686,9 +686,9 @@
       <velocity_decay/>
 
       <sensor
-        name="nortek_dvl500_300" type="custom"
+        name="water_linked_dvl_a50" type="custom"
         gz:type="dvl">
-        <pose>0 0 0 0 0 0</pose>
+        <pose>0 0 0.025 0 0 1.57079632679</pose>
         <always_on>1</always_on>
         <update_rate>8</update_rate>
         <topic>/dvl/velocity</topic>
@@ -696,28 +696,28 @@
           <type>phased_array</type>
           <arrangement degrees="true">
             <beam id="1">
-              <aperture>3</aperture>
+              <aperture>4.3</aperture>
               <rotation>-135</rotation>
-              <tilt>25</tilt>
+              <tilt>15</tilt>
             </beam>
             <beam>
-              <aperture>3</aperture>
+              <aperture>4.3</aperture>
               <rotation>135</rotation>
-              <tilt>25</tilt>
+              <tilt>15</tilt>
             </beam>
             <beam>
-              <aperture>3</aperture>
+              <aperture>4.3</aperture>
               <rotation>45</rotation>
-              <tilt>25</tilt>
+              <tilt>15</tilt>
             </beam>
             <beam>
-              <aperture>3</aperture>
+              <aperture>4.3</aperture>
               <rotation>-45</rotation>
-              <tilt>25</tilt>
+              <tilt>15</tilt>
             </beam>
           </arrangement>
           <tracking>
-            <water_mass_mode>
+            <!-- <water_mass_mode>
               <when>best</when>
               <water_velocity>
                 <x>0.</x>
@@ -733,7 +733,7 @@
                 <stddev>0.015</stddev>
               </noise>
               <visualize>true</visualize>
-            </water_mass_mode>
+            </water_mass_mode> -->
             <bottom_mode>
               <when>best</when>
               <noise type="gaussian">
@@ -742,8 +742,8 @@
               <visualize>true</visualize>
             </bottom_mode>
           </tracking>
-          <maximum_range>200.</maximum_range>
-          <minimum_range>0.3</minimum_range>
+          <maximum_range>50.</maximum_range>
+          <minimum_range>0.05</minimum_range>
           <!-- ENU to FSD -->
           <reference_frame>0 0 0 3.14 0 -1.57</reference_frame>
         </gz:dvl>
@@ -752,26 +752,27 @@
       <self_collide>0</self_collide>
       <enable_wind>0</enable_wind>
       <kinematic>0</kinematic>
-      <visual name="dvl500_base_link_visual">
+      <visual name="water_linked_dvl_a50_base_link_visual">
         <pose>0 0 0 0 0 3.14159</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
             <!-- Mesh is actually for a Nortek DVL1000-4000m for now -->
-            <uri>model://meshes/nortek_dvl500_300/DVL500-300m.dae</uri>
+            <!-- <uri>model://meshes/nortek_water_linked_dvl_a50_300/water_linked_dvl_a50-300m.dae</uri> -->
+            <uri>model://meshes/water_linked_dvl_a50/water_linked_dvl_a50.dae</uri>
           </mesh>
         </geometry>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
       </visual>
-      <collision name="dvl500_base_link_collision">
+      <collision name="water_linked_dvl_a50_base_link_collision">
         <laser_retro>0</laser_retro>
         <max_contacts>10</max_contacts>
         <pose>0 0 0 3.14159 0 0</pose>
         <geometry>
           <cylinder>
-            <radius>0.093</radius>
-            <length>0.203</length>
+            <radius>0.033</radius>
+            <length>0.025</length>
           </cylinder>
         </geometry>
         <surface>
@@ -822,9 +823,9 @@
       </collision>
     </link>
 
-    <joint name="dvl500_base_link_joint" type="fixed">
+    <joint name="water_linked_dvl_a50_base_link_joint" type="fixed">
       <parent>base_link</parent>
-      <child>dvl500_base_link</child>
+      <child>water_linked_dvl_a50_base_link</child>
     </joint>
         
   <allow_auto_disable>1</allow_auto_disable>
