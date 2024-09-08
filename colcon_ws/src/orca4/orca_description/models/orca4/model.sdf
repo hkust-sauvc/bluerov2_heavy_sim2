@@ -533,21 +533,50 @@
           </cylinder>
         </geometry>
       </visual>
-      <sensor name="left_camera" type="camera">
+      <sensor name="left_camera" type="rgbd_camera">
+      <!-- <sensor name="left_camera" type="camera"> -->
         <pose>0 0 -0.08750000000000001 0 1.5707963267948966 0</pose>
         <camera>
           <vertical_fov>1.3962634</vertical_fov>
           <image>
-            <width>3840</width>
-            <height>1440</height>
+      <!-- <width>1280</width>
+          <height>720</height> -->
+        <!-- <width>1920</width>
+          <height>1440</height> -->
+            <!-- <width>3840</width>
+            <height>2160</height> -->
+            <width>800</width>
+            <height>600</height>
           </image>
           <clip>
             <near>0.02</near>
-            <far>5</far>
+            <far>3</far>
           </clip>
         </camera>
+
+        <plugin
+          filename="UnderwaterCamera"
+          name="dave_gz_sensor_plugins::UnderwaterCamera">
+          <!-- blurish color -->
+       <attenuationR>0.1</attenuationR>
+    <attenuationG>0.1</attenuationG>
+    <attenuationB>0.05</attenuationB>
+  <backgroundR>28</backgroundR>
+    <backgroundG>107</backgroundG>
+    <backgroundB>160</backgroundB>
+
+        <!-- Murky Coastal Waters -->
+<!-- 
+      <attenuationR>0.8</attenuationR>
+    <attenuationG>0.5</attenuationG>
+    <attenuationB>0.2</attenuationB>
+    <backgroundR>85</backgroundR>
+    <backgroundG>107</backgroundG>
+    <backgroundB>47</backgroundB> -->
+        </plugin>
+
         <always_on>1</always_on>
-        <update_rate>10</update_rate>
+        <update_rate>3</update_rate>
         <visualize>true</visualize>
         <topic>stereo_left</topic>
       </sensor>
@@ -585,21 +614,48 @@
           </cylinder>
         </geometry>
       </visual>
-      <sensor name="right_camera" type="camera">
+      <sensor name="right_camera" type="rgbd_camera">
+      <!-- <sensor name="right_camera" type="camera"> -->
         <pose>0 0 -0.08750000000000001 0 1.5707963267948966 0</pose>
         <camera>
           <vertical_fov>1.3962634</vertical_fov>
           <image>
-            <width>3840</width>
-            <height>1440</height>
+          <!-- <width>1280</width>
+          <height>720</height> -->
+          <!-- <width>1920</width>
+          <height>1440</height> -->
+           <!-- <width>3840</width>
+            <height>2160</height> -->
+            <width>800</width>
+            <height>600</height>
           </image>
           <clip>
             <near>0.02</near>
-            <far>5</far>
+            <far>3</far>
           </clip>
         </camera>
+
+        <plugin
+          filename="UnderwaterCamera"
+          name="dave_gz_sensor_plugins::UnderwaterCamera">
+          <!-- Blurish color -->
+       <attenuationR>0.1</attenuationR>
+    <attenuationG>0.1</attenuationG>
+    <attenuationB>0.05</attenuationB>
+  <backgroundR>28</backgroundR>
+    <backgroundG>107</backgroundG>
+    <backgroundB>160</backgroundB>
+    <!-- Murkey Costal Waters -->
+      <!-- <attenuationR>0.8</attenuationR>
+    <attenuationG>0.5</attenuationG>
+    <attenuationB>0.2</attenuationB>
+    <backgroundR>85</backgroundR>
+    <backgroundG>107</backgroundG>
+    <backgroundB>47</backgroundB> -->
+        </plugin>
+        
         <always_on>1</always_on>
-        <update_rate>10</update_rate>
+        <update_rate>3</update_rate>
         <visualize>true</visualize>
         <topic>stereo_right</topic>
       </sensor>

@@ -12,6 +12,7 @@
 - [Git LFS](#git-lfs)
 ## Introduction
 This project is an underwater simulation based on [Orca4](https://github.com/clydemcqueen/orca4). Many changes have been added to this project such as using Unreal model for seabed scanning task, switching the rov model to BlueROV2 Heavy, and adding sensors such as DVL and acoustic sensor. 
+Underwater sensors (DVL and underwater cameras) are from [dave](https://github.com/IOES-Lab/dave)
 ## Version
 This environment for this project is ROS2 Humble and Gazebo Harmonic.
 ## How to start simulation?
@@ -118,6 +119,8 @@ Go to [orca4](src/orca4/orca_description/models/orca4/model.sdf) and change the 
 You can put the new camera parameters file at [cfg](src/orca4/orca_bringup/cfg/). 
 To update the parameters, copy the parameters to [sim_left.ini](src/orca4/orca_bringup/cfg/sim_left.ini) and [sim_right.ini](src/orca4/orca_bringup/cfg/sim_right.ini). This step is compulsory as Slam relies on the camera parameters.
 4. Update camera baseline
+The camera baseline must be decimal number!!!    
+
 Go to [sim_orca_params.yaml](src/orca4/orca_bringup/params/sim_orca_params.yaml) and update ```  camera_baseline: 823.74008  # Right camera info p[3], flip sign```
 Formula
 ```
@@ -139,6 +142,7 @@ map_file: "map.bin"
 ```
 
 ## DVL
+The data of DVL is published to ```/dvl/velocity```.
 Relevant information can be found [here](https://yeongdocat.notion.site/Custom-ros_gz-bridge-for-DVL-Plugin-39a621c52833475ea661dade2660350f).
 
 [Gazebo Sim DVL sensor documentation](https://gazebosim.org/api/sensors/8/classgz_1_1sensors_1_1DopplerVelocityLog.html).  
@@ -171,5 +175,47 @@ According to [BlueRobotics](https://bluerobotics.com/store/the-reef/dvl-a50/), t
 
 The above information is provided by [link](https://waterlinked.com/web/content/15701?unique=b4aef6d930bb256c64bae4e0ead8c56661bf12f0).
 
+## Underwater camera
+### Introduction
+As Gazebo doesn't provide realistic underwater imagery for ROV simulation, underwater camera plugin is used to recreate the imagery. Underwater camera consists of rgbd_camera and UnderwaterCamera plugin. The plugin makes use of the camera image and visual parameters (attenuation and background) to simulate the image.   
+Remarks: The plugin is only applicable to rgbd_camera.
+### Topic
+```/stereo_left/simulated_image``` and ```/stereo_right/simulated_image```
+### Underwater camera config
+- rgbd_camera resolution: 800 x 600
+The use of low resolution camera is to avoid using up all memory.
+- camera update rate
+The update rate of the cameras is critical to the simulation result. If the rate is set more than 3, the ROV is out-of-control. By setting the rate <= 3, the problem is solved but it will have a negative effect to the mapping quality. This issue may link to the hardware equipment.
+[Source](https://yeongdocat.notion.site/084db8b3a8f74adfbddf21ed92d445ed?v=757190b0ef6d4f51ba570a19300c9542&p=8aec0ec6d82c48beade703be379851c1&pm=s)
+- parameters
+     <plugin
+          filename="UnderwaterCamera"
+          name="dave_gz_sensor_plugins::UnderwaterCamera">
+          <!-- Blurish color -->
+
+       <attenuationR>0.1</attenuationR>
+    <attenuationG>0.1</attenuationG>
+    <attenuationB>0.05</attenuationB>
+  <backgroundR>28</backgroundR>
+    <backgroundG>107</backgroundG>
+    <backgroundB>160</backgroundB>
+    
+    <!-- Murkey Costal Waters -->
+      <!-- <attenuationR>0.8</attenuationR>
+    <attenuationG>0.5</attenuationG>
+    <attenuationB>0.2</attenuationB>
+    <backgroundR>85</backgroundR>
+    <backgroundG>107</backgroundG>
+    <backgroundB>47</backgroundB> -->
+        </plugin>
+Blurish and greenish
+```xml
+<attenuationR>0.8</attenuationR>
+<attenuationG>0.5</attenuationG>
+<attenuationB>0.2</attenuationB>
+<backgroundR>40</backgroundR>
+<backgroundG>100</backgroundG>
+<backgroundB>160</backgroundB>
+```
 ## Git LFS
 [Git LFS](https://git-lfs.com/) is used for tracking the larger-sized files such as the seabed model.   

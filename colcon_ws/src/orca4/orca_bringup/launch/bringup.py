@@ -196,8 +196,8 @@ def generate_launch_description():
                 'voc_file': orb_voc_file,
             }],
             remappings=[
-                ('/image_left/image_color_rect', '/stereo_left'),
-                ('/image_right/image_color_rect', '/stereo_right'),
+                ('/image_left/image_color_rect', '/stereo_left/simulated_image'),
+                ('/image_right/image_color_rect', '/stereo_right/simulated_image'),
                 ('/camera/camera_info', '/stereo_right/camera_info'),
             ],
             condition=IfCondition(LaunchConfiguration('slam')),
