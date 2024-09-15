@@ -71,15 +71,15 @@ dive.poses.append(make_pose(x=0.0, y=0.0, z=-4.0))
 
 # Big loop, will eventually result in a loop closure
 delay_loop = FollowWaypoints.Goal()
-delay_loop.poses.append(make_pose(x=0.0, y=0.0, z=-5.0))
+delay_loop.poses.append(make_pose(x=0.0, y=0.0, z=-1))
 for j in range(0, 2):
     for i in range(0, 7):
         if  i%2 == 0:
-            delay_loop.poses.append(make_pose(x=0.0, y=float(i), z=-5.0))
-            delay_loop.poses.append(make_pose(x=15.0, y=float(i), z=-5.0))
+            delay_loop.poses.append(make_pose(x=0.0, y=float(i), z=-7.5))
+            delay_loop.poses.append(make_pose(x=15.0, y=float(i), z=-7.5))
         else:
-            delay_loop.poses.append(make_pose(x=15.0, y=float(i), z=-5.0))
-            delay_loop.poses.append(make_pose(x=0.0, y=float(i), z=-5.0))
+            delay_loop.poses.append(make_pose(x=15.0, y=float(i), z=-7.5))
+            delay_loop.poses.append(make_pose(x=0.0, y=float(i), z=-7.5))
 
 # Send a goal to an action server and wait for the result.
 # Cancel the goal if the user hits ^C (KeyboardInterrupt).
