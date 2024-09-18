@@ -50,7 +50,8 @@ qtcreator-*
 # Emacs
 .#*
 
+*.yaml
+
 # Catkin custom files
 CATKIN_IGNORE
 
-*.yaml
