@@ -1,7 +1,7 @@
 # bluerov2_heavy_sim
 ## How to setup simulator?
-1. Install Git LFS      
-If Git LFS isn't isntalled, [install here](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage).
+<del>1. Install Git LFS      
+<del>If Git LFS isn't isntalled, [install here](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage).
 2. Clone the repo
 ```bash
 git clone git@github.com:HKUST-UROP-ROV-SIM/bluerov2_heavy_sim.git
@@ -10,8 +10,8 @@ git clone git@github.com:HKUST-UROP-ROV-SIM/bluerov2_heavy_sim.git
 ```bash
 cd ~/bluerov2_heavy_sim
 git submodule update --init --recursive
-git lfs fetch
-git lfs checkout
+<del>git lfs fetch
+<del>git lfs checkout
 cd orca4/docker
 ./build.sh
 ```
