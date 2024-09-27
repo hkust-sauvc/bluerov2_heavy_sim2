@@ -73,26 +73,5 @@
       <pose>0 0 -0.2 0 0 0</pose>
     </include>
 
-        <!-- <include>
-      <uri>model://dave_sensor_models/description/nortek_dvl500_300</uri>
-      <pose>0.0 0.0 0.0 0 0 0</pose>
-    </include> -->
-    
-    <!-- <include>
-      <uri>model://turbidity_generator</uri>
-      <pose>0 0 -10 0 0 0</pose>
-    </include> -->
-
-<!-- 
-    <include>
-     <uri>model://axes</uri>
-     <pose>0 0 0.2 0 0 0</pose>
-    </include> -->
-
-      <!-- <include>
-      <pose>0 0 0 0 0 0</pose>
-      <uri>model://dave_sensor_models/description/nortek_dvl500_300</uri>
-    </include> -->
-
   </world>
 </sdf>

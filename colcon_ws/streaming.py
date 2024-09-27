@@ -12,14 +12,14 @@ class CameraSubscriber(Node):
         # Subscription for the left camera
         self.left_camera_subscription = self.create_subscription(
             Image,
-            '/stereo_left/simulated_image',
+            '/stereo_left',
             self.left_image_callback,
             10)
 
         # Subscription for the right camera
         self.right_camera_subscription = self.create_subscription(
             Image,
-            '/stereo_right/simulated_image',
+            '/stereo_right',
             self.right_image_callback,
             10)
 

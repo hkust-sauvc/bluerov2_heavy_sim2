@@ -746,7 +746,7 @@
         gz:type="dvl">
         <pose>0 0 0.025 0 0 1.57079632679</pose>
         <always_on>1</always_on>
-        <update_rate>8</update_rate>
+        <update_rate>15</update_rate>
         <topic>/dvl/velocity</topic>
         <gz:dvl>
           <type>phased_array</type>
