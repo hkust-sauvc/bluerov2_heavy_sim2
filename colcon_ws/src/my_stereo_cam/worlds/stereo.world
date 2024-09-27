@@ -24,7 +24,7 @@
 
     <include>
       <uri>model://stereo_camera</uri>
-      <pose>-3 0 0 0 0 0</pose>
+      <pose>-8 0 0 0 0 0</pose>
     </include>
 
   <model name="multi_colored_cube">
@@ -37,7 +37,7 @@
       <visual name="visual">
         <geometry>
           <box>
-            <size>1 1 0.01</size>
+            <size>0.1 1 0.01</size>
           </box>
         </geometry>
         <material>
@@ -53,7 +53,7 @@
       <visual name="visual">
         <geometry>
           <box>
-            <size>1 1 0.01</size>
+            <size>0.1 1 0.01</size>
           </box>
         </geometry>
         <material>
@@ -69,12 +69,12 @@
       <visual name="visual">
         <geometry>
           <box>
-            <size>1 1 0.01</size>
+            <size>0.1 1 0.01</size>
           </box>
         </geometry>
         <material>
           <ambient>0 0 1 1</ambient> <!-- Blue -->
-          <diffuse>0 0 1 1</diffuse>
+          <diffuse>0 0 1 0</diffuse>
         </material>
       </visual>
     </link>
@@ -85,9 +85,9 @@
       <visual name="visual">
         <geometry>
           <box>
-            <size>1 1 0.01</size>
+            <size>0.1 1 0.01</size>
           </box>
-        </geometry>
+        </geometry>l
         <material>
           <ambient>1 1 0 0</ambient> <!-- Yellow -->
           <diffuse>1 1 0 0</diffuse>
@@ -101,7 +101,7 @@
       <visual name="visual">
         <geometry>
           <box>
-            <size>1 1 0.01</size>
+            <size>0.1 1 0.01</size>
           </box>
         </geometry>
         <material>
@@ -117,12 +117,12 @@
       <visual name="visual">
         <geometry>
           <box>
-            <size>1 1 0.01</size>
+            <size>0.1 1 0.01</size>
           </box>
         </geometry>
         <material>
           <ambient>1 0.5 0 1</ambient> <!-- Orange -->
-          <diffuse>1 0.5 0 0.5</diffuse>
+          <diffuse>1 0.5 0 1</diffuse>
         </material>
       </visual>
     </link>

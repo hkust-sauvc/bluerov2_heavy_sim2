@@ -177,7 +177,7 @@ class CameraSubscriber(Node):
         cx = 959.967467
         fy = 1143.126174
         cy = 719.840299
-        tx = -686.45  # Negative if the second camera is to the left of the first camera
+        tx = -114.40  # Negative if the second camera is to the left of the first camera
         self.P1 = np.array([[fx, 0, cx, 0], [0, fy, cy, 0], [0, 0, 1, 0]])
         self.P2 = np.array([[fx, 0, cx, tx], [0, fy, cy, 0], [0, 0, 1, 0]])
 
