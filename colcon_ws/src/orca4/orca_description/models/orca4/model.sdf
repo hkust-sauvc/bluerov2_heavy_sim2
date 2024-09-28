@@ -521,67 +521,36 @@
       </control>
 
     </plugin>
-    <!-- Left camera link -->
-    <link name="left_camera_link">
-      <pose>-0.18 0.18 -0.06749999999999999 0 0 0</pose>
-      <visual name="left_camera_tube">
-        <transparency>0.0</transparency>
-        <geometry>
-          <cylinder>
-            <length>0.135</length>
-            <radius>0.0275</radius>
-          </cylinder>
-        </geometry>
-      </visual>
-      <sensor name="left_camera" type="rgbd_camera">
-      <!-- <sensor name="left_camera" type="camera"> -->
-        <pose>0 0 -0.08750000000000001 0 1.5707963267948966 0</pose>
-        <camera>
+
+        <!-- Left Camera -->
+        <link name="left_camera_link">
+            <pose>0.2 0.05 0 0 0 0</pose>
+            <visual name="left_camera_visual">
+                <geometry>
+                    <sphere>
+                        <radius>0.02</radius>
+                    </sphere>
+                </geometry>
+            </visual>
+            <sensor name="left_camera_sensor" type="camera">
+                <camera>
           <vertical_fov>1.3962634</vertical_fov>
-          <image>
-      <!-- <width>1280</width>
-          <height>720</height> -->
-        <!-- <width>1920</width>
-          <height>1440</height> -->
-            <!-- <width>3840</width>
-            <height>2160</height> -->
-            <width>800</width>
-            <height>600</height>
-          </image>
-          <clip>
-            <near>0.02</near>
-            <far>3</far>
-          </clip>
-        </camera>
-
-        <plugin
-          filename="UnderwaterCamera"
-          name="dave_gz_sensor_plugins::UnderwaterCamera">
-          <!-- blurish color -->
-       <attenuationR>0.1</attenuationR>
-    <attenuationG>0.1</attenuationG>
-    <attenuationB>0.05</attenuationB>
-  <backgroundR>28</backgroundR>
-    <backgroundG>107</backgroundG>
-    <backgroundB>160</backgroundB>
-
-        <!-- Murky Coastal Waters -->
-<!-- 
-      <attenuationR>0.8</attenuationR>
-    <attenuationG>0.5</attenuationG>
-    <attenuationB>0.2</attenuationB>
-    <backgroundR>85</backgroundR>
-    <backgroundG>107</backgroundG>
-    <backgroundB>47</backgroundB> -->
-        </plugin>
-
-        <always_on>1</always_on>
-        <update_rate>3</update_rate>
-        <visualize>true</visualize>
-        <topic>stereo_left</topic>
-      </sensor>
-      <inertial>
-        <mass>0.001</mass>
+                    <image>
+                        <width>1920</width>
+                        <height>1440</height>
+                    </image>
+                    <clip>
+                        <near>0.1</near>
+                        <far>100</far>
+                    </clip>
+                </camera>
+                <always_on>1</always_on>
+                <update_rate>30</update_rate>
+                <visualize>true</visualize>
+                <topic>stereo_left</topic>
+            </sensor>
+             <inertial>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -591,8 +560,47 @@
           <izz>0.001</izz>
         </inertia>
       </inertial>
-    </link>
+        </link>
 
+        <!-- Right Camera -->
+        <link name="right_camera_link">
+            <pose>0.2 -0.05 0 0 0 0</pose>
+            <visual name="right_camera_visual">
+                <geometry>
+                    <sphere>
+                        <radius>0.02</radius>
+                    </sphere>
+                </geometry>
+            </visual>
+            <sensor name="right_camera_sensor" type="camera">
+                <camera>
+          <vertical_fov>1.3962634</vertical_fov>
+                    <image>
+                        <width>1920</width>
+                        <height>1440</height>
+                    </image>
+                    <clip>
+                        <near>0.1</near>
+                        <far>100</far>
+                    </clip>
+                </camera>
+                <always_on>1</always_on>
+                <update_rate>30</update_rate>
+                <visualize>true</visualize>
+                <topic>stereo_right</topic>
+            </sensor>
+             <inertial>
+        <mass>0.002</mass>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0</iyz>
+          <izz>0.001</izz>
+        </inertia>
+      </inertial>
+        </link>
 
 
     <!-- Attach left_camera_link to base_link -->
@@ -601,76 +609,6 @@
       <parent>base_link</parent>
       <child>left_camera_link</child>
     </joint>
-
-    <!-- Right camera link -->
-    <link name="right_camera_link">
-      <pose>-0.18 -0.18 -0.06749999999999999 0 0 0</pose>
-      <visual name="right_camera_tube">
-        <transparency>0.0</transparency>
-        <geometry>
-          <cylinder>
-            <length>0.135</length>
-            <radius>0.0275</radius>
-          </cylinder>
-        </geometry>
-      </visual>
-      <sensor name="right_camera" type="rgbd_camera">
-      <!-- <sensor name="right_camera" type="camera"> -->
-        <pose>0 0 -0.08750000000000001 0 1.5707963267948966 0</pose>
-        <camera>
-          <vertical_fov>1.3962634</vertical_fov>
-          <image>
-          <!-- <width>1280</width>
-          <height>720</height> -->
-          <!-- <width>1920</width>
-          <height>1440</height> -->
-           <!-- <width>3840</width>
-            <height>2160</height> -->
-            <width>800</width>
-            <height>600</height>
-          </image>
-          <clip>
-            <near>0.02</near>
-            <far>3</far>
-          </clip>
-        </camera>
-
-        <plugin
-          filename="UnderwaterCamera"
-          name="dave_gz_sensor_plugins::UnderwaterCamera">
-          <!-- Blurish color -->
-       <attenuationR>0.1</attenuationR>
-    <attenuationG>0.1</attenuationG>
-    <attenuationB>0.05</attenuationB>
-  <backgroundR>28</backgroundR>
-    <backgroundG>107</backgroundG>
-    <backgroundB>160</backgroundB>
-    <!-- Murkey Costal Waters -->
-      <!-- <attenuationR>0.8</attenuationR>
-    <attenuationG>0.5</attenuationG>
-    <attenuationB>0.2</attenuationB>
-    <backgroundR>85</backgroundR>
-    <backgroundG>107</backgroundG>
-    <backgroundB>47</backgroundB> -->
-        </plugin>
-        
-        <always_on>1</always_on>
-        <update_rate>3</update_rate>
-        <visualize>true</visualize>
-        <topic>stereo_right</topic>
-      </sensor>
-      <inertial>
-        <mass>0.001</mass>
-        <inertia>
-          <ixx>0.001</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.001</iyy>
-          <iyz>0</iyz>
-          <izz>0.001</izz>
-        </inertia>
-      </inertial>
-    </link>
 
   
     <!-- Attach right_camera_link to base_link -->
@@ -689,207 +627,6 @@
       <dimensions>3</dimensions>
     </plugin>
 
-    <link name="acoustic_pinger_link">
-      <!-- Visual Representation -->
-      <!-- <visual name="acoustic_pinger_visual">
-          <pose>0 0 0 0 0 0</pose> 
-          <geometry>
-              <cylinder>
-                  <radius>0.05</radius> 
-                  <length>0.2</length>  
-              </cylinder>
-          </geometry>
-          <material>
-              <ambient>1 0 0 1</ambient> 
-          </material>
-      </visual> -->
-
-    <!-- Inertial Properties -->
-      <inertial>
-          <pose>0 0 0 0 0 0</pose> <!-- Adjust pose to center mass correctly -->
-          <mass>1.0</mass> <!-- Mass of the pinger in kilograms -->
-          <inertia>
-              <!-- These values need to be calculated based on the geometry and mass distribution -->
-              <ixx>0.0001</ixx> <!-- Moment of inertia around X-axis -->
-              <iyy>0.0001</iyy> <!-- Moment of inertia around Y-axis -->
-              <izz>0.0001</izz> <!-- Moment of the inertia around Z-axis, can be different if needed -->
-          </inertia>
-      </inertial>
-  </link>
-
-  <plugin filename="libAcousticPingerPlugin.so" name="vrx::AcousticPingerPlugin">
-    <topic>/bluerov2_heavy/sensors/acoustics/receiver/range_bearing</topic>
-    <set_position_topic>/pinger/set_pinger_position</set_position_topic>
-    <!-- Noise and other parameters can be defined here -->
-  </plugin>
-
-    <link name="water_linked_dvl_a50_base_link">
-      <pose>0 0 -0.2 0 0 0</pose>
-      <inertial>
-        <pose>0 0 0 0 0 0</pose>
-        <mass>0.17</mass>
-        <inertia>
-          <ixx>0.0195872</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.0195872</iyy>
-          <iyz>0</iyz>
-          <izz>0.0151357</izz>
-        </inertia>
-      </inertial>
-      <velocity_decay/>
-      <gravity>1</gravity>
-      <velocity_decay/>
-
-      <sensor
-        name="water_linked_dvl_a50" type="custom"
-        gz:type="dvl">
-        <pose>0 0 0.025 0 0 1.57079632679</pose>
-        <always_on>1</always_on>
-        <update_rate>15</update_rate>
-        <topic>/dvl/velocity</topic>
-        <gz:dvl>
-          <type>phased_array</type>
-          <arrangement degrees="true">
-            <beam id="1">
-              <aperture>4.3</aperture>
-              <rotation>-135</rotation>
-              <tilt>15</tilt>
-            </beam>
-            <beam>
-              <aperture>4.3</aperture>
-              <rotation>135</rotation>
-              <tilt>15</tilt>
-            </beam>
-            <beam>
-              <aperture>4.3</aperture>
-              <rotation>45</rotation>
-              <tilt>15</tilt>
-            </beam>
-            <beam>
-              <aperture>4.3</aperture>
-              <rotation>-45</rotation>
-              <tilt>15</tilt>
-            </beam>
-          </arrangement>
-          <tracking>
-            <!-- <water_mass_mode>
-              <when>best</when>
-              <water_velocity>
-                <x>0.</x>
-                <y>0.</y>
-                <z>0.</z>
-              </water_velocity>
-              <boundaries>
-                <near>10.</near>
-                <far>100.</far>
-              </boundaries>
-              <bins>10</bins>
-              <noise type="gaussian">
-                <stddev>0.015</stddev>
-              </noise>
-              <visualize>true</visualize>
-            </water_mass_mode> -->
-            <bottom_mode>
-              <when>best</when>
-              <noise type="gaussian">
-                <stddev>0.005</stddev>
-              </noise>
-              <visualize>true</visualize>
-            </bottom_mode>
-          </tracking>
-          <maximum_range>50.</maximum_range>
-          <minimum_range>0.05</minimum_range>
-          <!-- ENU to FSD -->
-          <reference_frame>0 0 0 3.14 0 -1.57</reference_frame>
-        </gz:dvl>
-      </sensor>
-
-      <self_collide>0</self_collide>
-      <enable_wind>0</enable_wind>
-      <kinematic>0</kinematic>
-      <visual name="water_linked_dvl_a50_base_link_visual">
-        <pose>0 0 0 0 0 3.14159</pose>
-        <geometry>
-          <mesh>
-            <scale>1 1 1</scale>
-            <!-- Mesh is actually for a Nortek DVL1000-4000m for now -->
-            <!-- <uri>model://meshes/nortek_water_linked_dvl_a50_300/water_linked_dvl_a50-300m.dae</uri> -->
-            <uri>model://meshes/water_linked_dvl_a50/water_linked_dvl_a50.dae</uri>
-          </mesh>
-        </geometry>
-        <transparency>0</transparency>
-        <cast_shadows>1</cast_shadows>
-      </visual>
-      <collision name="water_linked_dvl_a50_base_link_collision">
-        <laser_retro>0</laser_retro>
-        <max_contacts>10</max_contacts>
-        <pose>0 0 0 3.14159 0 0</pose>
-        <geometry>
-          <cylinder>
-            <radius>0.033</radius>
-            <length>0.025</length>
-          </cylinder>
-        </geometry>
-        <surface>
-          <friction>
-            <ode>
-              <mu>1</mu>
-              <mu2>1</mu2>
-              <fdir1>0 0 0</fdir1>
-              <slip1>0</slip1>
-              <slip2>0</slip2>
-            </ode>
-            <torsional>
-              <coefficient>1</coefficient>
-              <patch_radius>0</patch_radius>
-              <surface_radius>0</surface_radius>
-              <use_patch_radius>1</use_patch_radius>
-              <ode>
-                <slip>0</slip>
-              </ode>
-            </torsional>
-          </friction>
-          <bounce>
-            <restitution_coefficient>0</restitution_coefficient>
-            <threshold>1e+06</threshold>
-          </bounce>
-          <contact>
-            <collide_without_contact>0</collide_without_contact>
-            <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
-            <collide_bitmask>1</collide_bitmask>
-            <ode>
-              <soft_cfm>0</soft_cfm>
-              <soft_erp>0.2</soft_erp>
-              <kp>1e+13</kp>
-              <kd>1</kd>
-              <max_vel>0.01</max_vel>
-              <min_depth>0</min_depth>
-            </ode>
-            <bullet>
-              <split_impulse>1</split_impulse>
-              <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
-              <soft_cfm>0</soft_cfm>
-              <soft_erp>0.2</soft_erp>
-              <kp>1e+13</kp>
-              <kd>1</kd>
-            </bullet>
-          </contact>
-        </surface>
-      </collision>
-    </link>
-
-    <joint name="water_linked_dvl_a50_base_link_joint" type="fixed">
-      <parent>base_link</parent>
-      <child>water_linked_dvl_a50_base_link</child>
-    </joint>
-        
-  <allow_auto_disable>1</allow_auto_disable>
-  <plugin
-      filename="DVLBridge"
-      name="dave_ros_gz_plugins::DVLBridge">
-      <topic>/dvl/velocity</topic>
-    </plugin>
-
+  
   </model>
 </sdf>

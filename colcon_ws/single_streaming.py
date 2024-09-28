@@ -9,7 +9,7 @@ class CameraSubscriber(Node):
         super().__init__('camera_subscriber')
         self.subscription = self.create_subscription(
             Image,
-            '/underwater_camera/simulated_image',
+            '/stereo_left',
             self.listener_callback,
             10)
         self.subscription  # prevent unused variable warning

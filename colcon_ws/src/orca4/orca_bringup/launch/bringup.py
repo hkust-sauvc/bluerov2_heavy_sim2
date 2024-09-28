@@ -95,11 +95,11 @@ def generate_launch_description():
             description='Full path to the ROS2 parameters file to use for Orca nodes',
         ),
 
-        DeclareLaunchArgument(
-            'slam',
-            default_value='True',
-            description='Launch SLAM?',
-        ),
+        # DeclareLaunchArgument(
+        #     'slam',
+        #     default_value='True',
+        #     description='Launch SLAM?',
+        # ),
 
         # Translate messages MAV <-> ROS
         Node(
@@ -112,19 +112,19 @@ def generate_launch_description():
             condition=IfCondition(LaunchConfiguration('mavros')),
         ),
 
-        # Manage overall system (start, stop, etc.)
-        Node(
-            package='orca_base',
-            executable='manager',
-            output='screen',
-            name='manager',
-            parameters=[orca_params_file],
-            remappings=[
-                # Topic is hard coded in orb_slam2_ros to /orb_slam2_stereo_node/pose
-                ('/camera_pose', '/orb_slam2_stereo_node/pose'),
-            ],
-            condition=IfCondition(LaunchConfiguration('base')),
-        ),
+        # # Manage overall system (start, stop, etc.)
+        # Node(
+        #     package='orca_base',
+        #     executable='manager',
+        #     output='screen',
+        #     name='manager',
+        #     parameters=[orca_params_file],
+        #     remappings=[
+        #         # Topic is hard coded in orb_slam2_ros to /orb_slam2_stereo_node/pose
+        #         ('/camera_pose', '/orb_slam2_stereo_node/pose'),
+        #     ],
+        #     condition=IfCondition(LaunchConfiguration('base')),
+        # ),
 
         # Base controller and localizer; manage external nav input, publish tf2 transforms, etc.
         Node(
@@ -186,35 +186,35 @@ def generate_launch_description():
             output='screen',
         ),
 
-        # orb_slam2: build a map of 3d points, localize against the map, and publish the camera pose
-        Node(
-            package='orb_slam2_ros',
-            executable='orb_slam2_ros_stereo',
-            output='screen',
-            name='orb_slam2_stereo',
-            parameters=[orca_params_file, {
-                'voc_file': orb_voc_file,
-            }],
-            remappings=[
-                ('/image_left/image_color_rect', '/stereo_left/simulated_image'),
-                ('/image_right/image_color_rect', '/stereo_right/simulated_image'),
-                ('/camera/camera_info', '/stereo_right/camera_info'),
-            ],
-            condition=IfCondition(LaunchConfiguration('slam')),
-        ),
+        # # orb_slam2: build a map of 3d points, localize against the map, and publish the camera pose
+        # Node(
+        #     package='orb_slam2_ros',
+        #     executable='orb_slam2_ros_stereo',
+        #     output='screen',
+        #     name='orb_slam2_stereo',
+        #     parameters=[orca_params_file, {
+        #         'voc_file': orb_voc_file,
+        #     }],
+        #     remappings=[
+        #         ('/image_left/image_color_rect', '/stereo_left/simulated_image'),
+        #         ('/image_right/image_color_rect', '/stereo_right/simulated_image'),
+        #         ('/camera/camera_info', '/stereo_right/camera_info'),
+        #     ],
+        #     condition=IfCondition(LaunchConfiguration('slam')),
+        # ),
 
-        # Include the rest of Nav2
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(os.path.join(orca_bringup_dir, 'launch', 'navigation_launch.py')),
-            launch_arguments={
-                'namespace': '',
-                'use_sim_time': 'False',
-                'autostart': 'False',
-                'params_file': configured_nav2_params,
-                'use_composition': 'False',
-                'use_respawn': 'False',
-                'container_name': 'nav2_container',
-            }.items(),
-            condition=IfCondition(LaunchConfiguration('nav')),
-        ),
+        # # Include the rest of Nav2
+        # IncludeLaunchDescription(
+        #     PythonLaunchDescriptionSource(os.path.join(orca_bringup_dir, 'launch', 'navigation_launch.py')),
+        #     launch_arguments={
+        #         'namespace': '',
+        #         'use_sim_time': 'False',
+        #         'autostart': 'False',
+        #         'params_file': configured_nav2_params,
+        #         'use_composition': 'False',
+        #         'use_respawn': 'False',
+        #         'container_name': 'nav2_container',
+        #     }.items(),
+        #     condition=IfCondition(LaunchConfiguration('nav')),
+        # ),
     ])

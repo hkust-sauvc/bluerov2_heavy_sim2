@@ -52,26 +52,126 @@
       <enable>orca4</enable>
     </plugin>
 
-    	<plugin
+    	<!-- <plugin
 			filename="gz-sim-dvl-system"
 			name="gz::sim::systems::DopplerVelocityLogSystem">
-		</plugin>
+		</plugin> -->
 
-
-    <!-- <include>
-     <uri>model://sand_heightmap</uri>
-     <pose>0 7 -10 0 0 0</pose>
-    </include> -->
 
     <include>
+     <uri>model://sand_heightmap</uri>
+     <pose>0 5 -5 0 0 0</pose>
+    </include>
+
+    <!-- <include>
       <uri>model://ust_seabed</uri>
       <pose>0 36 -8.5 0 0 0</pose>
-    </include>
+    </include> -->
 
     <include>
       <uri>model://orca4</uri>
       <pose>0 0 -0.2 0 0 0</pose>
     </include>
+      <model name="multi_colored_cube">
+    <static>true</static>
+    
+    <!-- Define each face with a different color -->
+    <!-- Face 1 - Red -->
+    <link name="face1">
+      <pose>0 0 0.5 0 0 0</pose>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.1 5 0.01</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1 0 0 1</ambient> <!-- Red -->
+          <diffuse>1 0 0 1</diffuse>
+        </material>
+      </visual>
+    </link>
+
+    <!-- Face 2 - Green -->
+    <link name="face2">
+      <pose>0 0 -0.5 0 0 0</pose>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.1 5 0.01</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0 1 0 1</ambient> <!-- Green -->
+          <diffuse>0 1 0 1</diffuse>
+        </material>
+      </visual>
+    </link>
+
+    <!-- Face 3 - Blue -->
+    <link name="face3">
+      <pose>0.5 0 0 1.5708 1.5708 1.5708</pose> <!-- Rotate 90 degrees around Z-axis -->
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.1 5 0.01</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0 0 1 1</ambient> <!-- Blue -->
+          <diffuse>0 0 1 0</diffuse>
+        </material>
+      </visual>
+    </link>
+
+    <!-- Face 4 - Yellow -->
+    <link name="face4">
+      <pose>-0.5 0 0 1.5708 1.5708 1.5708</pose>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.1 5 0.01</size>
+          </box>
+        </geometry>l
+        <material>
+          <ambient>1 1 0 0</ambient> <!-- Yellow -->
+          <diffuse>1 1 0 0</diffuse>
+        </material>
+      </visual>
+    </link>
+
+    <!-- Face 5 - Purple -->
+    <link name="face5">
+      <pose>0 0.5 0 1.5708 0 0</pose> <!-- Rotate 90 degrees around X-axis -->
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.1 5 0.01</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.5 0 0.5 1</ambient> <!-- Purple -->
+          <diffuse>0.5 0 0.5 1</diffuse>
+        </material>
+      </visual>
+    </link>
+
+    <!-- Face 6 - Orange -->
+    <link name="face6">
+      <pose>0 -0.5 0 1.5708 0 0</pose>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.1 5 0.01</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1 0.5 0 1</ambient> <!-- Orange -->
+          <diffuse>1 0.5 0 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
 
   </world>
 </sdf>
