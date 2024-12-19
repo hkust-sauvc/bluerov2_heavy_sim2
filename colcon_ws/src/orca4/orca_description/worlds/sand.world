@@ -58,10 +58,10 @@
 		</plugin> -->
 
 
-    <include>
+    <!-- <include>
      <uri>model://sand_heightmap</uri>
      <pose>0 5 -5 0 0 0</pose>
-    </include>
+    </include> -->
 
     <!-- <include>
       <uri>model://ust_seabed</uri>
