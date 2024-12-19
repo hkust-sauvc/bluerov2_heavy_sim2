@@ -36,9 +36,8 @@
             <size>0.457 0.575 0.05</size>
           </box>
         </geometry>
-      </collision>
+      </collision>  
  
-
       <!-- IMU sensor gyro and accel data will be sent to ArduSub -->
       <sensor name="imu_sensor" type="imu">
         <!-- Transform from the Gazebo body frame (x-forward, y-left, z-up)
@@ -47,11 +46,7 @@
         <always_on>1</always_on>
         <update_rate>1000.0</update_rate>
       </sensor>
-
-
-
-    </link>
-
+</link>
     <!-- Hydrodynamics plugin -->
     <plugin
         filename="gz-sim-hydrodynamics-system"
@@ -638,6 +633,63 @@
       <parent>base_link</parent>
       <child>right_camera_link</child>
     </joint>
+
+   <link name="ultrasonic_link">
+<pose>0 0 -0.1 0 1.5707963267948966 0</pose>    
+
+  <sensor name="gpu_lidar" type="gpu_lidar">
+<topic>U0</topic>
+    <update_rate>10</update_rate>
+    <ray>
+      <scan>
+        <horizontal>
+          <samples>1</samples>
+          <resolution>1</resolution>
+          <min_angle>0.1</min_angle>
+          <max_angle>0.1</max_angle>
+        </horizontal>
+        <vertical>
+          <samples>1</samples>
+          <resolution>1</resolution>
+          <min_angle>0.1</min_angle>
+          <max_angle>0.1</max_angle>
+        </vertical>
+      </scan>
+      <range>
+        <min>0.08</min>
+        <max>3</max>
+        <resolution>0.01</resolution>
+      </range>
+    </ray>
+    <always_on>1</always_on>
+    <visualize>true</visualize>
+  </sensor>
+   <visual name="ultrasonic_sensor">
+        <transparency>0.0</transparency>
+        <geometry>
+          <cylinder>
+            <length>0.03</length>
+            <radius>0.02</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+  <inertial>
+    <mass>0.001</mass>
+    <inertia>
+      <ixx>0.001</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>0.001</iyy>
+      <iyz>0</iyz>
+      <izz>0.001</izz>
+    </inertia>
+  </inertial>
+</link>
+
+<joint name="ultrasonic_joint" type="fixed">
+  <parent>base_link</parent>
+  <child>ultrasonic_link</child>
+</joint>
 
     <!-- Publish the ground-truth pose for rviz -->
     <plugin

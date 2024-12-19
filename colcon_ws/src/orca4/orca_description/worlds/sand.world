@@ -22,7 +22,7 @@
     <plugin
         filename="gz-sim-sensors-system"
         name="gz::sim::systems::Sensors">
-     <!-- <render_engine>ogre2</render_engine> -->
+     <render_engine>ogre2</render_engine>
     </plugin>
 
     <!-- IMU plugin manages all IMU sensors -->
@@ -144,7 +144,7 @@
     </include> -->
     <include>
      <uri>model://swimming_pool</uri>
-     <pose>0 0 -3 0 0 0</pose>
+     <pose>0 0 -3.3 0 0 0</pose>
     </include>
 
        <!-- <include>

@@ -234,6 +234,14 @@ def generate_launch_description():
             ],
             output='screen'
         ),
+        Node(
+            package='ros_gz_bridge',
+            executable='parameter_bridge',
+            arguments=[
+                '/U0@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan'
+            ],
+            output='screen'
+        ),
 
 
         # Bring up Orca and Nav2 nodes
