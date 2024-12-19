@@ -190,7 +190,8 @@ class BaseController : public rclcpp::Node
 
   void publish_rc()
   {
-    if (rc_pub_->get_subscription_count() > 0) {
+    // if (rc_pub_->get_subscription_count() > 0) {
+    if(true){
       mavros_msgs::msg::OverrideRCIn msg;
 
       // Most channels are not affected
@@ -219,50 +220,83 @@ class BaseController : public rclcpp::Node
     }
   }
 
-  void timer_cb()
-  {
-    if (running()) {
-      if (!underwater_motion_) {
-        // Initialize underwater motion from the EKF pose
-        underwater_motion_ = std::make_unique<UnderwaterMotion>(
-          now(),
-          get_logger(), cxt_, ardu_pose_.pose);
-      } else {
-        // Update motion from t-(1/rate) to t
-        underwater_motion_->update(now(), cmd_vel_);
-      }
+void timer_cb()
+{
+  // Set a constant forward velocity
+  cmd_vel_.linear.x = 0.5;  // Forward velocity in meters per second
+  cmd_vel_.linear.y = 0;    // No sideward motion
+  cmd_vel_.linear.z = 0;    // No vertical motion
+  cmd_vel_.angular.x = 0;   // No roll
+  cmd_vel_.angular.y = 0;   // No pitch
+  cmd_vel_.angular.z = 0;   // No yaw rotation
 
-      tf_odom_base_ = orca::pose_msg_to_transform(underwater_motion_->motion().pose);
-      tf_base_odom_ = tf_odom_base_.inverse();
-
-      motion_pub_->publish(underwater_motion_->motion());
-      odom_pub_->publish(underwater_motion_->odometry());
-
-      if (conn_) {
-        publish_rc();
-        publish_setpoint();
-      }
-    }
-
-    // Build/update the TF tree
-    publish_tf(cxt_.map_frame_id_, cxt_.slam_frame_id_, tf_map_slam_);
-    publish_tf(cxt_.map_frame_id_, cxt_.odom_frame_id_, tf_map_odom_);
-    publish_tf(cxt_.odom_frame_id_, cxt_.base_frame_id_, tf_odom_base_);
-
-    // If we don't have a SLAM pose, send odom as external navigation to the EKF
-    if (state_ == State::RUN_NOT_LOCALIZED) {
-      publish_ext_nav(tf_map_odom_ * tf_odom_base_);
-    } else if (state_ != State::RUN_LOCALIZED) {
-      publish_ext_nav(tf_odom_base_);
-    }
-
-    // State changes
-    if (state_ == State::BOOT && get_static_transforms()) {
-      change_state("found static transforms", State::HAVE_TF);
-    } else if (state_ == State::RUN_LOCALIZED && now() - slam_pose_time_ > slam_timeout_) {
-      change_state("SLAM timeout", State::RUN_NOT_LOCALIZED);
-    }
+  // Check if the motion model is initialized
+  if (!underwater_motion_) {
+    underwater_motion_ = std::make_unique<UnderwaterMotion>(
+      now(), get_logger(), cxt_, ardu_pose_.pose);
+  } else {
+    // Update the motion model
+    underwater_motion_->update(now(), cmd_vel_);
   }
+  
+  // Publish the updated odometry and motion information
+  motion_pub_->publish(underwater_motion_->motion());
+  odom_pub_->publish(underwater_motion_->odometry());
+
+  if (conn_) {
+    // Publish RC overrides and altitude setpoint if connected
+    publish_rc();
+    publish_setpoint();
+  }
+
+  // Continuously update the transforms based on the current state
+  publish_tf(cxt_.map_frame_id_, cxt_.odom_frame_id_, tf_map_odom_);
+  publish_tf(cxt_.odom_frame_id_, cxt_.base_frame_id_, tf_odom_base_);
+}
+  // void timer_cb()
+  // {
+  //   if (running()) {
+  //     if (!underwater_motion_) {
+  //       // Initialize underwater motion from the EKF pose
+  //       underwater_motion_ = std::make_unique<UnderwaterMotion>(
+  //         now(),
+  //         get_logger(), cxt_, ardu_pose_.pose);
+  //     } else {
+  //       // Update motion from t-(1/rate) to t
+  //       underwater_motion_->update(now(), cmd_vel_);
+  //     }
+
+  //     tf_odom_base_ = orca::pose_msg_to_transform(underwater_motion_->motion().pose);
+  //     tf_base_odom_ = tf_odom_base_.inverse();
+
+  //     motion_pub_->publish(underwater_motion_->motion());
+  //     odom_pub_->publish(underwater_motion_->odometry());
+
+  //     if (conn_) {
+  //       publish_rc();
+  //       publish_setpoint();
+  //     }
+  //   }
+
+  //   // Build/update the TF tree
+  //   publish_tf(cxt_.map_frame_id_, cxt_.slam_frame_id_, tf_map_slam_);
+  //   publish_tf(cxt_.map_frame_id_, cxt_.odom_frame_id_, tf_map_odom_);
+  //   publish_tf(cxt_.odom_frame_id_, cxt_.base_frame_id_, tf_odom_base_);
+
+  //   // If we don't have a SLAM pose, send odom as external navigation to the EKF
+  //   if (state_ == State::RUN_NOT_LOCALIZED) {
+  //     publish_ext_nav(tf_map_odom_ * tf_odom_base_);
+  //   } else if (state_ != State::RUN_LOCALIZED) {
+  //     publish_ext_nav(tf_odom_base_);
+  //   }
+
+  //   // State changes
+  //   if (state_ == State::BOOT && get_static_transforms()) {
+  //     change_state("found static transforms", State::HAVE_TF);
+  //   } else if (state_ == State::RUN_LOCALIZED && now() - slam_pose_time_ > slam_timeout_) {
+  //     change_state("SLAM timeout", State::RUN_NOT_LOCALIZED);
+  //   }
+  // }
 
   // Output from ArduSub EKF. Troubleshooting tip: if this message never appears, make sure that
   // the mavros and mavros_extras packages are installed and that all required MAVROS plugins are
@@ -290,31 +324,31 @@ class BaseController : public rclcpp::Node
   }
 
   // Output from SLAM system
-  void slam_pose_cb(const geometry_msgs::msg::PoseStamped::ConstSharedPtr & msg)
-  {
-    slam_pose_time_ = msg->header.stamp;
+  // void slam_pose_cb(const geometry_msgs::msg::PoseStamped::ConstSharedPtr & msg)
+  // {
+  //   slam_pose_time_ = msg->header.stamp;
 
-    if (running()) {
-      auto tf_orb_cam = orca::pose_msg_to_transform(msg->pose);
-      auto tf_slam_base = tf_slam_down_ * tf_orb_cam * tf_cam_base_;
+  //   if (running()) {
+  //     auto tf_orb_cam = orca::pose_msg_to_transform(msg->pose);
+  //     auto tf_slam_base = tf_slam_down_ * tf_orb_cam * tf_cam_base_;
 
-      if (state_ == State::RUN_NO_MAP) {
-        // This is our first SLAM pose, so set tf_map_slam. Note that the SLAM pose is unfiltered.
-        // Future: average N SLAM poses.
-        tf_map_slam_ = tf_map_odom_ * tf_odom_base_ * tf_slam_base.inverse();
-        RCLCPP_INFO(get_logger(), "tf_map_slam %s", orca::str(tf_map_slam_).c_str());
-      }
+  //     if (state_ == State::RUN_NO_MAP) {
+  //       // This is our first SLAM pose, so set tf_map_slam. Note that the SLAM pose is unfiltered.
+  //       // Future: average N SLAM poses.
+  //       tf_map_slam_ = tf_map_odom_ * tf_odom_base_ * tf_slam_base.inverse();
+  //       RCLCPP_INFO(get_logger(), "tf_map_slam %s", orca::str(tf_map_slam_).c_str());
+  //     }
 
-      // Send to ArduSub EKF
-      publish_ext_nav(tf_map_slam_ * tf_slam_base);
+  //     // Send to ArduSub EKF
+  //     publish_ext_nav(tf_map_slam_ * tf_slam_base);
 
-      if (state_ == State::RUN_NO_MAP) {
-        change_state("map created", State::RUN_LOCALIZED);
-      } else if (state_ == State::RUN_NOT_LOCALIZED) {
-        change_state("re-localized", State::RUN_LOCALIZED);
-      }
-    }
-  }
+  //     if (state_ == State::RUN_NO_MAP) {
+  //       change_state("map created", State::RUN_LOCALIZED);
+  //     } else if (state_ == State::RUN_NOT_LOCALIZED) {
+  //       change_state("re-localized", State::RUN_LOCALIZED);
+  //     }
+  //   }
+  // }
 
   void validate_parameters()
   {
@@ -432,12 +466,12 @@ public:
         ardu_pose_cb(msg);
       });
 
-    slam_pose_sub_ = create_subscription<geometry_msgs::msg::PoseStamped>(
-      "camera_pose", reliable,
-      [this](geometry_msgs::msg::PoseStamped::ConstSharedPtr msg) -> void
-      {
-        slam_pose_cb(msg);
-      });
+    // slam_pose_sub_ = create_subscription<geometry_msgs::msg::PoseStamped>(
+    //   "camera_pose", reliable,
+    //   [this](geometry_msgs::msg::PoseStamped::ConstSharedPtr msg) -> void
+    //   {
+    //     slam_pose_cb(msg);
+    //   });
 
     RCLCPP_INFO(get_logger(), "base_controller ready");
   }

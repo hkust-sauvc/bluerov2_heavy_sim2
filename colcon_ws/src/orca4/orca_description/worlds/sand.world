@@ -2,6 +2,10 @@
 <sdf version="1.6">
   <world name="sand">
 
+    <!-- <physics name="4ms" type="dart">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics> -->
     <!-- Base Gazebo plugins -->
     <plugin
         filename="gz-sim-physics-system"
@@ -18,7 +22,7 @@
     <plugin
         filename="gz-sim-sensors-system"
         name="gz::sim::systems::Sensors">
-<!--      <render_engine>ogre</render_engine>-->
+     <!-- <render_engine>ogre2</render_engine> -->
     </plugin>
 
     <!-- IMU plugin manages all IMU sensors -->
@@ -26,6 +30,26 @@
         filename="libgz-sim-imu-system.so"
         name="gz::sim::systems::Imu">
     </plugin>
+   <!-- <plugin
+      filename="gz-sim-magnetometer-system"
+      name="gz::sim::systems::Magnetometer">
+    </plugin>
+    <plugin
+      filename="gz-sim-forcetorque-system"
+      name="gz::sim::systems::ForceTorque">
+    </plugin>
+    <plugin
+      filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+    <plugin
+      filename="gz-sim-contact-system"
+      name="gz::sim::systems::Contact">
+    </plugin>
+    <plugin
+      filename="gz-sim-navsat-system"
+      name="gz::sim::systems::NavSat">
+    </plugin> -->
 
 
     <plugin filename="libPublisherPlugin.so" name="vrx::PublisherPlugin">
@@ -52,20 +76,81 @@
       <enable>orca4</enable>
     </plugin>
 
+        <!-- The wave field
+    <plugin filename="libPublisherPlugin.so" name="vrx::PublisherPlugin">
+      <message type="gz.msgs.Param" topic="/vrx/wavefield/parameters"
+               every="2.0">
+        params {
+          key: "direction"
+          value {
+            type: DOUBLE
+            double_value: 0.0
+          }
+        }
+        params {
+          key: "gain"
+          value {
+            type: DOUBLE
+            double_value: 0.3
+          }
+        }
+        params {
+          key: "period"
+          value {
+            type: DOUBLE
+            double_value: 5
+          }
+        }
+        params {
+          key: "steepness"
+          value {
+            type: DOUBLE
+            double_value: 0
+          }
+        }   
+      </message>
+    </plugin>
+
+  <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact" /> -->
+
+        <scene>
+      <sky></sky>
+      <grid>false</grid>
+      <ambient>1.0 1.0 1.0</ambient>
+      <background>0.8 0.8 0.8</background>
+    </scene>
+
+    <light type="directional" name="sun">
+  <cast_shadows>true</cast_shadows>
+  <pose>0 0 10 0 0 0</pose>
+  <diffuse>1 1 1 1</diffuse>
+  <specular>0.1 0.1 0.1 1</specular>
+  <attenuation>
+    <range>100</range>
+    <constant>0.9</constant>
+    <linear>0.01</linear>
+    <quadratic>0.001</quadratic>
+  </attenuation>
+  <direction>-0.5 0.5 -1</direction>
+</light>
     	<!-- <plugin
 			filename="gz-sim-dvl-system"
 			name="gz::sim::systems::DopplerVelocityLogSystem">
 		</plugin> -->
 
-
     <!-- <include>
-     <uri>model://sand_heightmap</uri>
-     <pose>0 5 -5 0 0 0</pose>
+      <uri>model://water_plane</uri>
+      <pose>0 5 -5 0 0 0</pose>
     </include> -->
+    <include>
+     <uri>model://swimming_pool</uri>
+     <pose>0 0 -3 0 0 0</pose>
+    </include>
 
-    <!-- <include>
-      <uri>model://ust_seabed</uri>
-      <pose>0 36 -8.5 0 0 0</pose>
+       <!-- <include>
+      <name>Coast Waves</name>
+      <pose>0 0 0 0 0 0</pose>
+      <uri>coast_waves</uri>
     </include> -->
 
     <include>

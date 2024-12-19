@@ -37,6 +37,7 @@
           </box>
         </geometry>
       </collision>
+ 
 
       <!-- IMU sensor gyro and accel data will be sent to ArduSub -->
       <sensor name="imu_sensor" type="imu">
@@ -536,14 +537,24 @@
                 <camera>
           <vertical_fov>1.3962634</vertical_fov>
                     <image>
-                        <width>1920</width>
-                        <height>1440</height>
+                        <width>800</width>
+                        <height>500</height>
                     </image>
                     <clip>
                         <near>0.1</near>
                         <far>100</far>
                     </clip>
                 </camera>
+                  <!-- <plugin
+                  filename="UnderwaterCamera"
+                  name="dave_gz_sensor_plugins::UnderwaterCamera">
+                <attenuationR>0.1</attenuationR>
+                <attenuationG>0.1</attenuationG>
+                <attenuationB>0.05</attenuationB>
+                <backgroundR>28</backgroundR>
+                <backgroundG>107</backgroundG>
+                <backgroundB>160</backgroundB>
+                </plugin> -->
                 <always_on>1</always_on>
                 <update_rate>30</update_rate>
                 <visualize>true</visualize>
@@ -576,14 +587,24 @@
                 <camera>
           <vertical_fov>1.3962634</vertical_fov>
                     <image>
-                        <width>1920</width>
-                        <height>1440</height>
+                        <width>800</width>
+                        <height>600</height>
                     </image>
                     <clip>
                         <near>0.1</near>
                         <far>100</far>
                     </clip>
                 </camera>
+                <!-- <plugin
+                  filename="UnderwaterCamera"
+                  name="dave_gz_sensor_plugins::UnderwaterCamera">
+                <attenuationR>0.1</attenuationR>
+                <attenuationG>0.1</attenuationG>
+                <attenuationB>0.05</attenuationB>
+                <backgroundR>28</backgroundR>
+                <backgroundG>107</backgroundG>
+                <backgroundB>160</backgroundB>
+                </plugin> -->
                 <always_on>1</always_on>
                 <update_rate>30</update_rate>
                 <visualize>true</visualize>

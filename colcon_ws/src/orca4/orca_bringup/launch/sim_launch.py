@@ -234,18 +234,7 @@ def generate_launch_description():
             ],
             output='screen'
         ),
-        # Node(
-        #     package='mavros',
-        #     executable='mavros_node',
-        #     name='mavros',
-        #     parameters=[{
-        #         'mavros/startup_px4_usb_quirk': True,
-        #         'mavros/fcu_url': 'tcp://localhost',
-        #         'mavros/gcs_url': 'udp://@localhost:14550',
-        #         'mavros/target_system_id': 1,
-        #         'mavros/target_component_id': 1
-        #     }]
-        # ),
+
 
         # Bring up Orca and Nav2 nodes
         IncludeLaunchDescription(

@@ -36,11 +36,25 @@ find_package(Eigen3 REQUIRED)
 # ament_environment_hooks("hooks/resource_paths.sh")
 
 #============================================================================
+# Waves
+add_library(Waves SHARED
+  src/Wavefield.cc
+)
+target_link_libraries(Waves PUBLIC
+  gz-common${GZ_COMMON_VER}::gz-common${GZ_COMMON_VER}
+  gz-sim${GZ_SIM_VER}::core
+  gz-math${GZ_MATH_VER}
+  Eigen3::Eigen
+)
+install(
+  TARGETS Waves
+  DESTINATION lib)
 
 # Plugins
 list(APPEND VRX_GZ_PLUGINS
   AcousticPingerPlugin
   PublisherPlugin
+  WaveVisual
 )
 
 foreach(PLUGIN ${VRX_GZ_PLUGINS})
@@ -52,6 +66,7 @@ foreach(PLUGIN ${VRX_GZ_PLUGINS})
     gz-sensors${GZ_SENSORS_VER}::gz-sensors${GZ_SENSORS_VER}
     gz-utils${GZ_UTILS_VER}::gz-utils${GZ_UTILS_VER}
     Eigen3::Eigen
+    Waves
   )
 endforeach()
 
