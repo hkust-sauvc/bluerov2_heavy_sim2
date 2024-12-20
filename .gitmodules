@@ -22,3 +22,6 @@
 	path = orca4
 	url = git@github.com:hkust-sauvc/orca4.git
 
+[submodule "colcon_ws/src/auv"]
+	path = colcon_ws/src/auv
+	url = git@github.com:hkust-sauvc/auv.git
