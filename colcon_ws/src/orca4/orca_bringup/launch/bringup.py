@@ -67,7 +67,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument(
             'base',
-            default_value='True',
+            default_value='False',
             description='Launch base controller?',
         ),
 
@@ -126,44 +126,44 @@ def generate_launch_description():
         #     condition=IfCondition(LaunchConfiguration('base')),
         # ),
 
-        # Base controller and localizer; manage external nav input, publish tf2 transforms, etc.
-        Node(
-            package='orca_base',
-            executable='base_controller',
-            output='screen',
-            name='base_controller',
-            parameters=[orca_params_file],
-            remappings=[
-                # Topic is hard coded in orb_slam2_ros to /orb_slam2_stereo_node/pose
-                ('/camera_pose', '/orb_slam2_stereo_node/pose'),
-            ],
-            condition=IfCondition(LaunchConfiguration('base')),
-        ),
+        # # Base controller and localizer; manage external nav input, publish tf2 transforms, etc.
+        # Node(
+        #     package='orca_base',
+        #     executable='base_controller',
+        #     output='screen',
+        #     name='base_controller',
+        #     parameters=[orca_params_file],
+        #     remappings=[
+        #         # Topic is hard coded in orb_slam2_ros to /orb_slam2_stereo_node/pose
+        #         ('/camera_pose', '/orb_slam2_stereo_node/pose'),
+        #     ],
+        #     condition=IfCondition(LaunchConfiguration('base')),
+        # ),
 
-        # Replacement for base_controller: complete the tf tree
-        ExecuteProcess(
-            cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
-                 '--frame-id', 'map',
-                 '--child-frame-id', 'slam'],
-            output='screen',
-            condition=UnlessCondition(LaunchConfiguration('base')),
-        ),
+        # # Replacement for base_controller: complete the tf tree
+        # ExecuteProcess(
+        #     cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
+        #          '--frame-id', 'map',
+        #          '--child-frame-id', 'slam'],
+        #     output='screen',
+        #     condition=UnlessCondition(LaunchConfiguration('base')),
+        # ),
 
-        ExecuteProcess(
-            cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
-                 '--frame-id', 'map',
-                 '--child-frame-id', 'odom'],
-            output='screen',
-            condition=UnlessCondition(LaunchConfiguration('base')),
-        ),
+        # ExecuteProcess(
+        #     cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
+        #          '--frame-id', 'map',
+        #          '--child-frame-id', 'odom'],
+        #     output='screen',
+        #     condition=UnlessCondition(LaunchConfiguration('base')),
+        # ),
 
-        ExecuteProcess(
-            cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
-                 '--frame-id', 'odom',
-                 '--child-frame-id', 'base_link'],
-            output='screen',
-            condition=UnlessCondition(LaunchConfiguration('base')),
-        ),
+        # ExecuteProcess(
+        #     cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
+        #          '--frame-id', 'odom',
+        #          '--child-frame-id', 'base_link'],
+        #     output='screen',
+        #     condition=UnlessCondition(LaunchConfiguration('base')),
+        # ),
 
         # Replacement for an URDF file: base_link->left_camera_link is static
         ExecuteProcess(
