@@ -44,9 +44,24 @@
              to the ArduPilot body frame (x-forward, y-right, z-down) -->
         <pose>0 0 0 3.142 0 0</pose>
         <always_on>1</always_on>
-        <update_rate>1000.0</update_rate>
+        <update_rate>20.0</update_rate>
+        <!-- <imu>
+          <angular_velocity>
+              <noise type="gaussian">
+                  <mean>0.0</mean>
+                  <stddev>0.0</stddev>
+              </noise>
+          </angular_velocity>
+          <linear_acceleration>
+              <noise type="gaussian">
+                  <mean>0.0</mean>
+                  <stddev>0.0</stddev>
+              </noise>
+          </linear_acceleration>
+        </imu> -->
       </sensor>
-</link>
+
+    </link>
     <!-- Hydrodynamics plugin -->
     <plugin
         filename="gz-sim-hydrodynamics-system"
@@ -553,7 +568,7 @@
                 <always_on>1</always_on>
                 <update_rate>30</update_rate>
                 <visualize>true</visualize>
-                <topic>stereo_left</topic>
+                <topic>auv/camera/stereo_left</topic>
             </sensor>
              <inertial>
         <mass>0.002</mass>
@@ -603,7 +618,7 @@
                 <always_on>1</always_on>
                 <update_rate>30</update_rate>
                 <visualize>true</visualize>
-                <topic>stereo_right</topic>
+                <topic>auv/camera/stereo_right</topic>
             </sensor>
              <inertial>
         <mass>0.002</mass>

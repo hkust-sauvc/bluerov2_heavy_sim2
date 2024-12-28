@@ -243,6 +243,15 @@ def generate_launch_description():
             output='screen'
         ),
 
+        Node(
+            package='ros_gz_bridge',
+            executable='parameter_bridge',
+            arguments=[
+                '/world/sand/model/orca4/link/base_link/sensor/imu_sensor/imu@sensor_msgs/msg/Imu[gz.msgs.IMU'
+            ],
+            output='screen'
+        ),
+
 
         # Bring up Orca and Nav2 nodes
         IncludeLaunchDescription(
