@@ -169,7 +169,7 @@ def generate_launch_description():
         Node(
             package='ros_gz_image',
             executable='image_bridge',
-            arguments=['stereo_left', 'stereo_right'],
+            arguments=['auv/camera/stereo_left', 'auv/camera/stereo_right'],
             output='screen',
         ),
 
