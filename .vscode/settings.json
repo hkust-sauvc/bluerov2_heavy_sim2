@@ -1,5 +1,5 @@
 {
-    "cmake.sourceDirectory": "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/src/dave/gazebo/dave_gz_sensor_plugins",
+    "cmake.sourceDirectory": "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/src/auv",
     "files.associations": {
         "cctype": "cpp",
         "clocale": "cpp",

@@ -25,3 +25,7 @@
 [submodule "colcon_ws/src/auv"]
 	path = colcon_ws/src/auv
 	url = git@github.com:hkust-sauvc/auv.git
+
+[submodule "colcon_ws/src/image_pipeline"]
+	path = colcon_ws/src/image_pipeline
+	url = git@github.com:hkust-sauvc/image_pipeline.git
