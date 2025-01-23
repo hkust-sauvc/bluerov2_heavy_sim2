@@ -47,11 +47,11 @@ def generate_launch_description():
     mavros_params_file = LaunchConfiguration('mavros_params_file')
     nav2_bt_file = os.path.join(orca_bringup_dir, 'behavior_trees', 'orca4_bt.xml')
     nav2_params_file = os.path.join(orca_bringup_dir, 'params', 'nav2_params.yaml')
-    orca_params_file = LaunchConfiguration('orca_params_file')
+    # orca_params_file = LaunchConfiguration('orca_params_file')
 
-    # get_package_share_directory('orb_slam2_ros') will fail if orb_slam2_ros isn't installed
-    orb_voc_file = os.path.join('install', 'orb_slam2_ros', 'share', 'orb_slam2_ros',
-                                'orb_slam2', 'Vocabulary', 'ORBvoc.txt')
+    # # get_package_share_directory('orb_slam2_ros') will fail if orb_slam2_ros isn't installed
+    # orb_voc_file = os.path.join('install', 'orb_slam2_ros', 'share', 'orb_slam2_ros',
+    #                             'orb_slam2', 'Vocabulary', 'ORBvoc.txt')
 
     # Rewrite to add the full path
     # The rewriter will only rewrite existing keys

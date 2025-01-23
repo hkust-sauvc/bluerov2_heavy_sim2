@@ -29,3 +29,6 @@
 [submodule "colcon_ws/src/image_pipeline"]
 	path = colcon_ws/src/image_pipeline
 	url = git@github.com:hkust-sauvc/image_pipeline.git
+[submodule "colcon_ws/src/ros_py"]
+	path = colcon_ws/src/ros_py
+	url = git@github.com:hkust-sauvc/ros_py.git

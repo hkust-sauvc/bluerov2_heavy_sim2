@@ -33,3 +33,9 @@ ros2 launch orca_bringup sim_launch.py
 ```bash
 ros2 run orca_bringup mission_runner.py
 ```
+
+# Colcon build
+```
+colcon build --packages-skip orca_base orca_msgs orca_shared orca_nav2
+```
+

@@ -20,6 +20,7 @@ colcon_ws="bluerov2_heavy_sim2/colcon_ws"
 colcon_ws_path="${orca4_path}/${colcon_ws}"
 
 # Specific for NVIDIA drivers, required for OpenGL >= 3.3
+
 docker run -it \
     --rm \
     --name orca4 \
@@ -27,13 +28,15 @@ docker run -it \
     -e QT_X11_NO_MITSHM=1 \
     -e XAUTHORITY=$XAUTH \
     -e NVIDIA_VISIBLE_DEVICES=all \
-    -e NVIDIA_DRIVER_CAPABILITIES=all \
+    -e NVIDIA_DRIVER_CAPABILITIES=all,graphics \
     -v "$XAUTH:$XAUTH" \
     -v "/tmp/.X11-unix:/tmp/.X11-unix" \
     -v "/etc/localtime:/etc/localtime:ro" \
     -v "/dev/input:/dev/input" \
+    --env="QT_X11_NO_MITSHM=1"  \
+    --env="DISPLAY"  \
+    --gpus=all \
     --mount type=bind,source=$colcon_ws_path,target=/home/orca4/colcon_ws \
-    --privileged \
     --security-opt seccomp=unconfined \
     --runtime=nvidia \
     orca4:latest

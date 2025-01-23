@@ -173,38 +173,38 @@ def generate_launch_description():
             output='screen',
         ),
 
-        # Gazebo Sim doesn't publish camera info, so do that here
-        Node(
-            package='orca_base',
-            executable='camera_info_publisher',
-            name='left_info_publisher',
-            output='screen',
-            parameters=[{
-                'camera_info_url': 'file://' + sim_left_ini,
-                'camera_name': 'stereo_left',
-                'frame_id': 'stereo_left_frame',
-                'timer_period_ms': 50,
-            }],
-            remappings=[
-                ('/camera_info', '/stereo_left/camera_info'),
-            ],
-        ),
+        # # Gazebo Sim doesn't publish camera info, so do that here
+        # Node(
+        #     package='orca_base',
+        #     executable='camera_info_publisher',
+        #     name='left_info_publisher',
+        #     output='screen',
+        #     parameters=[{
+        #         'camera_info_url': 'file://' + sim_left_ini,
+        #         'camera_name': 'stereo_left',
+        #         'frame_id': 'stereo_left_frame',
+        #         'timer_period_ms': 50,
+        #     }],
+        #     remappings=[
+        #         ('/camera_info', '/stereo_left/camera_info'),
+        #     ],
+        # ),
 
-        Node(
-            package='orca_base',
-            executable='camera_info_publisher',
-            name='right_info_publisher',
-            output='screen',
-            parameters=[{
-                'camera_info_url': 'file://' + sim_right_ini,
-                'camera_name': 'stereo_right',
-                'frame_id': 'stereo_right_frame',
-                'timer_period_ms': 50,
-            }],
-            remappings=[
-                ('/camera_info', '/stereo_right/camera_info'),
-            ],
-        ),
+        # Node(
+        #     package='orca_base',
+        #     executable='camera_info_publisher',
+        #     name='right_info_publisher',
+        #     output='screen',
+        #     parameters=[{
+        #         'camera_info_url': 'file://' + sim_right_ini,
+        #         'camera_name': 'stereo_right',
+        #         'frame_id': 'stereo_right_frame',
+        #         'timer_period_ms': 50,
+        #     }],
+        #     remappings=[
+        #         ('/camera_info', '/stereo_right/camera_info'),
+        #     ],
+        # ),
 
 
         # Publish ground truth pose from Ignition Gazebo
