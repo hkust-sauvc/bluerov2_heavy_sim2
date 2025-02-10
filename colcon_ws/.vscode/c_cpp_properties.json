@@ -1,0 +1,34 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/install/stereo_image_proc/include/**",
+        "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/install/image_proc/include/**",
+        "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/install/tracetools_image_pipeline/include/**",
+        "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/install/image_view/include/**",
+        "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/install/image_rotate/include/**",
+        "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/install/image_publisher/include/**",
+        "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/install/depth_image_proc/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/src/auv/include/**",
+        "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/src/orca4/orca_base/include/**",
+        "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/src/orca4/orca_nav2/include/**",
+        "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/src/orca4/orca_shared/include/**",
+        "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/src/ros2_shared/include/**",
+        "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/src/ros_gz/ros_gz_bridge/include/**",
+        "/home/ubuntu/bluerov2_heavy_sim2/colcon_ws/src/ros_gz/ros_gz_sim/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-arm64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
