@@ -1,0 +1,1 @@
+ros2 service call /mavros/cmd/arming mavros_msgs/srv/CommandBool value:\ false\ 
